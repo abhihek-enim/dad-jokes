@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body{
+        background-color: rgb(45, 133, 177);
+        
+      }
+      #container{
+        width: 500px;
+        height: 300px;
+        background-color: rgb(209, 209, 40);
+        padding: 10px;
+        text-align: center;
+        margin-top: 200px;
+        margin-left: 450px;
+        border-radius: 20px;
+      }
+      #joke-title{
+        font-weight: bold;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 2rem;
+      }
+      #joke{
+        width: 100%;
+        height: 150px;
+        background-color: yellowgreen;
+        margin-top:10px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        padding: 10px;
+        font-size: 1.5rem;
+        
+
+      }
+      #btn {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4c81af;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin-top: 10px;
+}
+
+#btn:hover {background-color: #2030bd}
+
+#btn:active {
+  background-color:#2030bd;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h3 id="joke-title">DAD JOKES!</h3>
+        <p id="joke"></p>
+        <button id="btn">Next joke!</button>
+
+    </div>
+    <script>
+    const jokes=document.querySelector("#joke");
+    const btn=document.querySelector("#btn");
+    
+    const getJokes=()=>{
+          const setHeaders={
+            headers:{
+                Accept:"application/json"
+            }
+          }
+          fetch('https://icanhazdadjoke.com',setHeaders)
+          .then((res)=>res.json())
+          .then((data)=>{
+            jokes.innerHTML=data.joke;
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+    }
+    btn.addEventListener('click',getJokes)
+    getJokes();
+    </script>
+</body>
+</html>
